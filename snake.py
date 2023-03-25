@@ -41,7 +41,17 @@ def move():
         snake.pop(0)
 
     clear()
-
+    
+    randNum = randrange(12)
+    if randNum == 0:
+        food.x -= 10
+    elif randrange(100) == 1:
+        food.x += 10
+    elif randrange(10) == 2:
+        food.y -= 10
+    elif randrange(100) == 3:
+        food.y += 10
+        
     for body in snake:
         square(body.x, body.y, 9, 'black')
 
