@@ -8,7 +8,7 @@ from freegames import square, vector
 food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
-
+color = 'green'
 
 def change(x, y):
     """Change snake direction."""
@@ -20,6 +20,23 @@ def inside(head):
     """Return True if head inside boundaries."""
     return -200 < head.x < 190 and -200 < head.y < 190
 
+def color3():
+    """Change snake color."""
+    randColor = randrange(1, 6)
+    color = 'black'
+    if randColor == 1:
+        color = 'black'
+    elif randColor == 2:
+        color = 'pink'
+    elif randColor == 3:
+        color = 'gray'
+    elif randColor == 4:
+        color = 'cyan'
+    elif randColor == 5:
+        color = 'lightgreen'
+    else:
+        color = 'skyblue'
+    return color
 
 def move():
     """Move snake forward one segment."""
@@ -31,12 +48,29 @@ def move():
         update()
         return
 
+    
     snake.append(head)
 
+    global color
     if head == food:
         print('Snake:', len(snake))
         food.x = randrange(-15, 15) * 10
         food.y = randrange(-15, 15) * 10
+    
+        randColor = randrange(1, 6)
+        if randColor == 1:
+            color = 'green'
+        elif randColor == 2:
+            color = 'purple'
+        elif randColor == 3:
+            color = 'orange'
+        elif randColor == 4:
+            color = 'brown'
+        elif randColor == 5:
+            color = 'yellow'
+        else:
+            color = 'blue'
+        print(color)
     else:
         snake.pop(0)
 
@@ -53,9 +87,9 @@ def move():
         food.y += 10
         
     for body in snake:
-        square(body.x, body.y, 9, 'black')
+        square(body.x, body.y, 9, color3())
 
-    square(food.x, food.y, 9, 'green')
+    square(food.x, food.y, 9, color)
     update()
     ontimer(move, 100)
 
